@@ -10,6 +10,9 @@ public class Tile {
 	public Tile(int position) {
 		number = position;
 	}
+
+    //TODO: finish all other functions for this class or
+    //get rid of it if unneeded
 	
 	
 	

@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
@@ -30,7 +29,6 @@ public class WordleGame {
 			while (myScanner.hasNextLine()) {
 				answers.add(myScanner.nextLine());
 			}
-			System.out.println(answers);
 			myScanner.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found, please use a file called answers.txt");
@@ -39,7 +37,7 @@ public class WordleGame {
 	}
 	
 	/*
-	 * Takes an arraylist of Strings and returns one randomly
+	 * Takes an Arraylist of Strings and returns one randomly
 	 * 
 	 * @param answerList an arraylist of strings
 	 * @return String a randomly selected string
@@ -50,6 +48,10 @@ public class WordleGame {
 		return answerList.get(randIndex);
 	}
 	
+	/*
+	 * A method that creates an ArrayList of every character in the alphabet
+	 * @return the ArrayList of characters that includes every letter in the alphabet
+	 */
 	public static ArrayList<Character> createCharArray() {
 		ArrayList<Character> arrLi = new ArrayList<Character>();
 		char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
@@ -59,11 +61,17 @@ public class WordleGame {
 		return arrLi;
 	}
 
-	
-	public static ArrayList<Integer> checkMultiples(char ch, String guess) {
+	/*
+	 * A method that checks how many times a character appears in a String and returns the
+	 * indices in which the character appears
+	 * @param ch the character to be checked in the String
+	 * @param str the string in which to count the characters
+	 * @return an ArrayList of the indexes in which the character appears in the string
+	 */
+	public static ArrayList<Integer> checkMultiples(char ch, String str) {
 		ArrayList<Integer> arr = new ArrayList<Integer>();
-		for (int i = 0; i < guess.length(); i++) {
-			if (ch == guess.charAt(i)) {
+		for (int i = 0; i < str.length(); i++) {
+			if (ch == str.charAt(i)) {
 				arr.add(i);
 			}
 		}
@@ -108,7 +116,6 @@ public class WordleGame {
 	
 	/*
 	 * Compares String guess to String answer and returns an ArrayList of colors to signal comparison
-	 * 
 	 * @param guess the String the user entered as their guess
 	 * @param answer the String the user is trying to figure out
 	 * @return an ArrayList where each color indicates info about the guess as compared to the answer
@@ -120,6 +127,12 @@ public class WordleGame {
 		return result;
 	}
 	
+	/*
+	 * A method that prints to tell the user that they have guessed the correct
+	 * and how many guesses they made
+	 * 
+	 * @param guessCount the amount of guesses made
+	 */
 	public static void printWinMessage(int guessCount) {
 		System.out.print("Congratulations! You got the word in " 
 				+ guessCount);
@@ -131,6 +144,12 @@ public class WordleGame {
 		System.out.println();
 	}
 	
+	/*
+	 * A method that checks if the correct answer has been reached
+	 * @param result the ArrayList that represents the guess compared to the right answer
+	 * @param guessCount how many times a guess has been made
+	 * @return returns true if the game is still being played
+	 */
 	public static Boolean checkResult(ArrayList<Color> result, int guessCount) {
 		Boolean stillPlaying = true;
 		int correctCount = 0;
@@ -149,17 +168,16 @@ public class WordleGame {
 	
 	
 	/**
-	 * planning okay basically i could tie the positions to its options or tie the 
-	 * characters to like some sort of option if that makes sense
-	 * @param args
+	 *
+	 *
+	 * 
 	 */
-	public static void play() {
+	public static void main( String[] args ) {
 		Scanner in = new Scanner(System.in);
 		ArrayList<String> answerList = getAnswers("answers.txt");
 		String answer = pickAnswer(answerList);
 		//ArrayList<Character> charsLeft = createCharArray();
 		//have a class for gray, yellow, and green?
-		//System.out.println("Answer is " + answer); //TODO: debugging; delete
 		int guessCount = 0;
 		Boolean stillPlaying = true;
 		while (stillPlaying && (guessCount < 6)) {
