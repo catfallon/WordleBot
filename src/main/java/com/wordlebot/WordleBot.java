@@ -12,7 +12,7 @@ public class WordleBot {
      * @return Letter the letter associated with the given character
      */
     public static Letter findLetter(char ch, ArrayList<Letter> letters) {
-        Letter le = new Letter('1')
+        Letter le = new Letter('1');
         for (int i = 0; i < letters.size(); i++) {
             if (letters.get(i).getChar() == ch) {
                 le = letters.get(i);

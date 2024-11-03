@@ -20,18 +20,34 @@ public class Tile {
         this.eliminated = new ArrayList<Character>();
 	}
 
+    
+    /** 
+     * @return int
+     */
     public int getNumber() {
         return this.number;
     }
 
+    
+    /** 
+     * @param num
+     */
     public void setNumber(int num) {
         this.number = num;
     }
 
+    
+    /** 
+     * @return ArrayList<Character>
+     */
     public ArrayList<Character> getPossibilities() {
         return this.possibilities;
     }
 
+    
+    /** 
+     * @param newPossibilities
+     */
     public void setPossibilities (ArrayList<Character> newPossibilities) {
         this.possibilities = newPossibilities;
     }
