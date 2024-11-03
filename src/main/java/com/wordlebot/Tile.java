@@ -1,16 +1,53 @@
 package com.wordlebot;
 
-import java.util.Set;
+import java.util.ArrayList;
+
+/*
+ * A class that is meant to represent each letter position in the Wordle word.
+ * Each tile corresponds to a certain letter of the five-letter word,
+ * for 5 total tiles.
+ */
 
 public class Tile {
     public int number;
-	public Set<Character> possibilities;
-	public Set<Character> eliminated;
+	public ArrayList<Character> possibilities;
+	public ArrayList<Character> eliminated;
 	
 	public Tile(int position) {
-		number = position;
+		this.number = position;
+        this.possibilities = new ArrayList<Character>();
+        //TODO: ^ make that work
+        this.eliminated = new ArrayList<Character>();
 	}
 
+    public int getNumber() {
+        return this.number;
+    }
+
+    public void setNumber(int num) {
+        this.number = num;
+    }
+
+    public ArrayList<Character> getPossibilities() {
+        return this.possibilities;
+    }
+
+    public void setPossibilities (ArrayList<Character> newPossibilities) {
+        this.possibilities = newPossibilities;
+    }
+
+    public ArrayList<Character> getEliminated() {
+        return this.eliminated;
+    }
+
+    public void setEliminated (ArrayList<Character> newEliminated) {
+        this.possibilities = newEliminated;
+    }
+
+    public void eliminate(char ch) {
+        this.eliminated.add(ch);
+        this.possibilities.remove(ch);
+    }
     //TODO: finish all other functions for this class or
     //get rid of it if unneeded
 	
