@@ -11,11 +11,12 @@ import org.junit.Test;
 /**
  * Unit test for simple App.
  */
-public class AppTest 
+public class WordleTest 
 {
     /**
      * Rigorous Test :-)
      */
+	//TODO: delete this method
     @Test
     public void shouldAnswerWithTrue()
     {
@@ -23,7 +24,7 @@ public class AppTest
     }
 
     @Test
-	void testCheckGreensAll() {
+	public void testCheckGreensAll() {
 		ArrayList<Color> correct = new ArrayList<Color>();
 		for (int i = 0; i < 5; i++) {
 			correct.add(Color.GREEN);
@@ -34,7 +35,7 @@ public class AppTest
 	}
 	
 	@Test
-	void testCheckGreensThree() {
+	public void testCheckGreensThree() {
 		ArrayList<Color> correct = new ArrayList<Color>();
 		correct.add(Color.GREEN);
 		correct.add(Color.GRAY);
@@ -47,7 +48,7 @@ public class AppTest
 	}
 	
 	@Test
-	void testCheckMultiples3() {
+	public void testCheckMultiples3() {
 		ArrayList<Integer> correct = new ArrayList<Integer>();
 		correct.add(0);
 		correct.add(2);
@@ -57,14 +58,14 @@ public class AppTest
 	}
 	
 	@Test
-	void testCheckMultiples0() {
+	public void testCheckMultiples0() {
 		ArrayList<Integer> correct = new ArrayList<Integer>();
 		ArrayList<Integer> test = WordleGame.checkMultiples('e', "sassy");
 		assertEquals(correct, test);
 	}
 	
 	@Test
-	void testCheckMultiples1() {
+	public void testCheckMultiples1() {
 		ArrayList<Integer> correct = new ArrayList<Integer>();
 		correct.add(1);
 		ArrayList<Integer> test = WordleGame.checkMultiples('a', "sassy");
@@ -72,7 +73,7 @@ public class AppTest
 	}
 	
 	@Test
-	void testCheckMultiples5() {
+	public void testCheckMultiples5() {
 		ArrayList<Integer> correct = new ArrayList<Integer>();
 		correct.add(0);
 		correct.add(1);
@@ -84,7 +85,7 @@ public class AppTest
 	}
 	
 	@Test
-	void testCheckYellows() {
+	public void testCheckYellows() {
 		ArrayList<Color> correct = new ArrayList<Color>();
 		correct.add(Color.YELLOW);
 		correct.add(Color.GRAY);
@@ -97,7 +98,7 @@ public class AppTest
 	}
 	
 	@Test
-	void testCheckYellows0() {
+	public void testCheckYellows0() {
 		ArrayList<Color> correct = new ArrayList<Color>();
 		correct.add(Color.GRAY);
 		correct.add(Color.GRAY);
@@ -110,7 +111,7 @@ public class AppTest
 	}
 	
 	@Test
-	void testCheckYellows5() {
+	public void testCheckYellows5() {
 		ArrayList<Color> correct = new ArrayList<Color>();
 		correct.add(Color.YELLOW);
 		correct.add(Color.YELLOW);
@@ -124,7 +125,7 @@ public class AppTest
 	
 	//TODO: make this one with greens already in both arraylists
 	@Test
-	void testCheckYellowsWithGreens() {
+	public void testCheckYellowsWithGreens() {
 		ArrayList<Color> correct = new ArrayList<Color>();
 		correct.add(Color.GREEN);
 		correct.add(Color.GRAY);
@@ -139,7 +140,7 @@ public class AppTest
 	}
 	
 	@Test
-	void testCheckGuess() {
+	public void testCheckGuess() {
 		ArrayList<Color> correct = new ArrayList<Color>();
 		correct.add(Color.GREEN);
 		correct.add(Color.GREEN);
@@ -151,7 +152,7 @@ public class AppTest
 	}
 	
 	@Test
-	void testCheckGuessMultiples() {
+	public void testCheckGuessMultiples() {
 		ArrayList<Color> correct = new ArrayList<Color>();
 		correct.add(Color.GREEN);
 		correct.add(Color.YELLOW);
@@ -163,7 +164,7 @@ public class AppTest
 	}
 
 	@Test
-	void testCheckGuessMultiplesInOrder() {
+	public void testCheckGuessMultiplesInOrder() {
 		ArrayList<Color> correct = new ArrayList<Color>();
 		correct.add(Color.YELLOW);
 		correct.add(Color.YELLOW);
@@ -175,7 +176,7 @@ public class AppTest
 	}
 	
 	@Test
-	void testCheckGuessMultiplesInDiffOrder() {
+	public void testCheckGuessMultiplesInDiffOrder() {
 		ArrayList<Color> correct = new ArrayList<Color>();
 		correct.add(Color.GREEN);
 		correct.add(Color.YELLOW);
@@ -187,7 +188,7 @@ public class AppTest
 	}
 	
 	@Test
-	void testCheckGuessMultiples1() {
+	public void testCheckGuessMultiples1() {
 		ArrayList<Color> correct = new ArrayList<Color>();
 		correct.add(Color.GREEN);
 		correct.add(Color.GREEN);
@@ -198,8 +199,14 @@ public class AppTest
 		assertEquals(test, correct);
 	}
 	
+	/*
+	 * Made this test because I thought running the program one time
+	 * produced a wrong result but it works fine with this test
+	 * Should probably investigate if something else messed things up
+	 * but I also easily could have gotten confused and it actually works fine
+	 */
 	@Test
-	void testCheckGuessStareJerky() {
+	public void testCheckGuessStareJerky() {
 		ArrayList<Color> correct = new ArrayList<Color>();
 		correct.add(Color.GRAY);
 		correct.add(Color.GRAY);
@@ -207,6 +214,23 @@ public class AppTest
 		correct.add(Color.YELLOW);
 		correct.add(Color.YELLOW);
 		ArrayList<Color> test = WordleGame.checkGuess("stare", "jerky");
+		assertEquals(test, correct);
+	}
+
+	@Test
+	public void testFindLetter() {
+		Letter correct = new Letter('s');
+		ArrayList<Letter> letters = WordleBot.createCharArrayList(); //test depends on this working correctly, maybe change that
+		Letter test = WordleBot.findLetter('s', letters);
+		assertEquals(test.getChar(), correct.getChar());
+		//TODO: I probably need to write like an equals method for Letter
+	}
+
+	@Test
+	public void testFindLetter2() {
+		Letter correct = new Letter('s');
+		ArrayList<Letter> letters = WordleBot.createCharArrayList(); //test depends on this working correctly, maybe change that
+		Letter test = WordleBot.findLetter('s', letters);
 		assertEquals(test, correct);
 	}
 }

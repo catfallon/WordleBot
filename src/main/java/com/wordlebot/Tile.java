@@ -19,7 +19,6 @@ public class Tile {
         //TODO: ^ make that work
         this.eliminated = new ArrayList<Character>();
 	}
-
     
     /** 
      * @return int

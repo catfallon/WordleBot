@@ -79,10 +79,11 @@ public class WordleGame {
 	}
 	
 	/*
-	 * A method that checks against the edge case where a guess contains multiple of the same letter
-	 * @param ch the character to check if it's in answer multiple times
-	 * @param the String to check if the ch is in twice
-	 * @param arr an array of the letters in the answer
+	 * A method that fills out which tiles should be Yellow
+	 * @param guess the word that has been guessed
+	 * @param answer the word that is the true answer
+	 * @param result an ArrayList representing which letters in guess are present in
+	 * answer and which are in the correct position (see README for explanation of game)
 	 */
 	public static void checkYellows(String guess, String answer, ArrayList<Color> result) {
 		for (int i = 0; i < guess.length(); i++) {

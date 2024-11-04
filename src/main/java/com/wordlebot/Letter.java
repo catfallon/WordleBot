@@ -7,12 +7,15 @@ package com.wordlebot;
  * for example, if the letter appears in the first position of a wordle word 50 times,
  * then count[0] = 50
  */
-public class Letter {
+
+public class Letter 
+extends Object {
     public char letter;
     int[] counts; //stores the amount of times the letter appears in that position in the wordle word
 
     public Letter(char letter) {
         this.letter = letter;
+        this.counts = new int[5];
         for (int i = 0; i < 5; i++) {
             this.counts[i] = 0;
         }
@@ -75,5 +78,18 @@ public class Letter {
      */
     public void incrementCount(int index) {
         this.counts[index] = this.counts[index] + 1;
+    }
+
+    public boolean equals(Letter l2) {
+        boolean equal = true;
+        if (l2.getChar() != this.letter) {
+            equal = false;
+        }
+        for (int i = 0; i < counts.length; i++) {
+            if (this.counts[i] != l2.getCountFromIndex(i)) {
+                equal = false;
+            }
+        }
+        return equal;
     }
 }
