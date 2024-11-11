@@ -6,6 +6,9 @@ package com.wordlebot;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+
+import com.wordlebot.input.InputProvider;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -173,17 +176,16 @@ public class WordleGame {
 	 *
 	 * 
 	 */
-	public static void main( String[] args ) {
-		Scanner in = new Scanner(System.in);
+	public static boolean play(InputProvider in) {
+		
 		ArrayList<String> answerList = getAnswers("answers.txt");
 		String answer = pickAnswer(answerList);
 		//ArrayList<Character> charsLeft = createCharArray();
-		//have a class for gray, yellow, and green?
+		//Scanner in = new Scanner(InputP);
 		int guessCount = 0;
 		Boolean stillPlaying = true;
 		while (stillPlaying && (guessCount < 6)) {
-			System.out.print("Enter guess: ");
-			String guess = in.next();
+			String guess = in.getInput();
 			//TODO: probably check if the guess is valid
 			//TODO: could make a thing where it forces you to play hard mode and/or displays what
 			//letters you have left
@@ -198,10 +200,7 @@ public class WordleGame {
 			stillPlaying = checkResult(result, guessCount);
 
 		}
-		if ((guessCount == 6) && stillPlaying) {
-			System.out.println("Brutal!\nYou have lost.\n");
-		}
-		in.close();
+		return stillPlaying; //method should only return true if the game has been lost
 	}
 	
 
