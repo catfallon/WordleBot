@@ -50,6 +50,15 @@ public class WordleGame {
 		int randIndex = rand.nextInt(answerList.size());
 		return answerList.get(randIndex);
 	}
+
+	public static String checkGuessIsValid(String guess) {
+		guess = guess.trim().toLowerCase();
+		if (guess.length() != 5) {
+			guess = "nope";
+			System.out.println("Guess is not valid! Please try again");
+		}
+		return guess;
+	}
 	
 	/*
 	 * A method that creates an ArrayList of every character in the alphabet
@@ -93,8 +102,23 @@ public class WordleGame {
 			ArrayList<Integer> indicesInGuess = checkMultiples(guess.charAt(i), guess);
 			ArrayList<Integer> indicesInAnswer = checkMultiples(guess.charAt(i), answer);
 			while ((indicesInGuess.size() > 0) && (indicesInAnswer.size() > 0)) {
+				/*iterates through IndicesInAnswer and removes the ones that should be ignored */
+				/* ArrayList<Integer> greens = new ArrayList<Integer>();
+				for (int j = 0; j < indicesInAnswer.size(); j++) {
+					if (result.get(j) == Color.GREEN) {
+						greens.add(j); //TODO: obviously broken
+					}
+				}
+
+				for (int k = 0; k < greens.size(); k++) {
+					indicesInAnswer.remove(greens.get(k));
+				} */
+
 				if (answer.indexOf(guess.charAt(i)) >= 0) { //if character of guess is in answer
 					if (result.get(indicesInGuess.get(0)) != Color.GREEN) {
+						//TODO: fix
+						//AND I GUESS UNLESS THE OTHER OCCURENCE IS ALREADY GREEN
+						//UNLESS IT DOES HAVE MULTIPLE
 						result.set(indicesInGuess.get(0), Color.YELLOW);
 					}
 				}
@@ -180,28 +204,30 @@ public class WordleGame {
 		
 		ArrayList<String> answerList = getAnswers("answers.txt");
 		String answer = pickAnswer(answerList);
+		System.out.println("Answer is " + answer);
 		//ArrayList<Character> charsLeft = createCharArray();
 		//Scanner in = new Scanner(InputP);
 		int guessCount = 0;
 		Boolean stillPlaying = true;
 		while (stillPlaying && (guessCount < 6)) {
 			String guess = in.getInput();
-			//TODO: probably check if the guess is valid
+			guess = checkGuessIsValid(guess);
 			//TODO: could make a thing where it forces you to play hard mode and/or displays what
 			//letters you have left
-			guessCount++;
-			guess = guess.trim().toLowerCase();
-			System.out.println("Guess is " + guess); //TODO: debugging; delete
-			
-			ArrayList<Color> result = checkGuess(guess, answer);
-			
-			System.out.println(result);
-			System.out.println();
-			stillPlaying = checkResult(result, guessCount);
-
+			if (guess != "nope") { //if guess was invalid, it is set to this String 
+				guessCount++;
+				System.out.println("Guess is " + guess); //TODO: debugging; delete
+				
+				ArrayList<Color> result = checkGuess(guess, answer);
+				
+				System.out.println(result);
+				System.out.println();
+				stillPlaying = checkResult(result, guessCount);
+			}
+		}
+		if (stillPlaying) {
+			System.out.println("Better luck next time! The answer was " + answer);
 		}
 		return stillPlaying; //method should only return true if the game has been lost
 	}
-	
-
 }

@@ -67,6 +67,7 @@ public class WordleBot {
     public static void main(String[] args) {
         ArrayList<String> answers = WordleGame.getAnswers("answers.txt");
         WordleGame game = new WordleGame();
+        //ALWAYS NEED TO SET INPUT BEFORE GETTING INPUT DO NOT FORGET
         System.out.println("a: " + Character.getNumericValue('a')
         + "\nb: " + Character.getNumericValue('b')
         + "\nz: " + Character.getNumericValue('z'));

@@ -15,8 +15,7 @@ public class Tile {
 	
 	public Tile(int position) {
 		this.number = position;
-        this.possibilities = new ArrayList<Character>();
-        //TODO: ^ make that work
+        this.possibilities = WordleGame.createCharArray();
         this.eliminated = new ArrayList<Character>();
 	}
     

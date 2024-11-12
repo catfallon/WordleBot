@@ -8,8 +8,10 @@ public class WordleUser {
 
 public static void main(String[] args) {
     HumanInputProvider in = new HumanInputProvider();
-    WordleGame.play(in);
-
+    boolean lost = WordleGame.play(in);
+    if (lost) {
+        System.out.println("Better luck next time!");
+    }
     in.close();
 }
 }

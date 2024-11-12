@@ -42,9 +42,9 @@ public class WordleTest
 		correct.add(Color.GREEN);
 		correct.add(Color.GRAY);
 		correct.add(Color.GREEN);
-		ArrayList<Color> result = new ArrayList<Color>(Collections.nCopies(5, Color.GRAY));
-		WordleGame.checkGreens("loner", "lunar", result);
-		assertEquals(result, correct);
+		ArrayList<Color> test = new ArrayList<Color>(Collections.nCopies(5, Color.GRAY));
+		WordleGame.checkGreens("loner", "lunar", test);
+		assertEquals(correct, test);
 	}
 	
 	@Test
@@ -138,6 +138,23 @@ public class WordleTest
 		WordleGame.checkYellows("sharp", "spork", test);
 		assertEquals(correct, test);
 	}
+
+	@Test
+	public void testCheckYellowsWithGreensInBoth() {
+		ArrayList<Color> correct = new ArrayList<Color>();
+		correct.add(Color.GREEN);
+		correct.add(Color.GREEN);
+		correct.add(Color.GRAY);
+		correct.add(Color.GREEN);
+		correct.add(Color.GREEN);
+		ArrayList<Color> test = new ArrayList<Color>(Collections.nCopies(5, Color.GRAY));
+		test.set(0, Color.GREEN);
+		test.set(1, Color.GREEN);
+		test.set(3, Color.GREEN);
+		test.set(4, Color.GREEN);
+		WordleGame.checkYellows("parer", "paler", test);
+		assertEquals(correct, test);
+	}
 	
 	@Test
 	public void testCheckGuess() {
@@ -172,7 +189,7 @@ public class WordleTest
 		correct.add(Color.GRAY);
 		correct.add(Color.YELLOW);
 		ArrayList<Color> test = WordleGame.checkGuess("omnim", "mommy"); //its not an actual word but its ok
-		assertEquals(test, correct);
+		assertEquals(correct, test);
 	}
 	
 	@Test
@@ -184,7 +201,7 @@ public class WordleTest
 		correct.add(Color.GRAY);
 		correct.add(Color.YELLOW);
 		ArrayList<Color> test = WordleGame.checkGuess("mymim", "mommy"); //its not an actual word but its ok
-		assertEquals(test, correct);
+		assertEquals(correct, test);
 	}
 	
 	@Test
@@ -196,7 +213,7 @@ public class WordleTest
 		correct.add(Color.GRAY);
 		correct.add(Color.GRAY);
 		ArrayList<Color> test = WordleGame.checkGuess("scoob", "scrap");
-		assertEquals(test, correct);
+		assertEquals(correct, test);
 	}
 	
 	/*
@@ -214,7 +231,20 @@ public class WordleTest
 		correct.add(Color.YELLOW);
 		correct.add(Color.YELLOW);
 		ArrayList<Color> test = WordleGame.checkGuess("stare", "jerky");
-		assertEquals(test, correct);
+		assertEquals(correct, test);
+	}
+
+	//TODO: this fails
+	@Test
+	public void testCheckGuessParer() {
+		ArrayList<Color> correct = new ArrayList<Color>();
+		correct.add(Color.GREEN);
+		correct.add(Color.GREEN);
+		correct.add(Color.GRAY);
+		correct.add(Color.GREEN);
+		correct.add(Color.GREEN);
+		ArrayList<Color> test = WordleGame.checkGuess("parer", "paler");
+		assertEquals(correct, test);
 	}
 
 	@Test
@@ -222,15 +252,16 @@ public class WordleTest
 		Letter correct = new Letter('s');
 		ArrayList<Letter> letters = WordleBot.createCharArrayList(); //test depends on this working correctly, maybe change that
 		Letter test = WordleBot.findLetter('s', letters);
-		assertEquals(test.getChar(), correct.getChar());
+		assertEquals(correct.getChar(), test.getChar());
 		//TODO: I probably need to write like an equals method for Letter
 	}
 
+	//TODO: fix, only doing literal equals, not actual equals
 	@Test
 	public void testFindLetter2() {
 		Letter correct = new Letter('s');
 		ArrayList<Letter> letters = WordleBot.createCharArrayList(); //test depends on this working correctly, maybe change that
 		Letter test = WordleBot.findLetter('s', letters);
-		assertEquals(test, correct);
+		assertEquals(correct, test);
 	}
 }

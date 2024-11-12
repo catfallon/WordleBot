@@ -9,9 +9,15 @@ public class HumanInputProvider implements InputProvider {
         this.scn = new Scanner(System.in);
     }
 
+    
+    public String getHardModeInput() {
+        System.out.println("Would you like to play hard mode? Y/N");
+        return scn.nextLine();
+    }
+
     @Override
     public String getInput() {
-        System.out.print("Enter input: ");
+        System.out.print("Enter a guess: ");
         return scn.nextLine();
     }
 
