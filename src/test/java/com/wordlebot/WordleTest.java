@@ -123,7 +123,6 @@ public class WordleTest
 		assertEquals(correct, test);
 	}
 	
-	//TODO: make this one with greens already in both arraylists
 	@Test
 	public void testCheckYellowsWithGreens() {
 		ArrayList<Color> correct = new ArrayList<Color>();

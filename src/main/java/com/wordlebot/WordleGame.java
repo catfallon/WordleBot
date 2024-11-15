@@ -101,6 +101,18 @@ public class WordleGame {
 		for (int i = 0; i < guess.length(); i++) {
 			ArrayList<Integer> indicesInGuess = checkMultiples(guess.charAt(i), guess);
 			ArrayList<Integer> indicesInAnswer = checkMultiples(guess.charAt(i), answer);
+			ArrayList<Integer> greens = new ArrayList<Integer>();
+			for (int j = 0; j < indicesInAnswer.size(); j++) {
+				if (result.get(indicesInAnswer.get(j)) == Color.GREEN) {
+					greens.add(indicesInAnswer.get(j));
+					
+				}
+			}
+			for (int k = 0; k < greens.size(); k++) {
+				indicesInAnswer.remove(greens.get(k));
+				indicesInGuess.remove(greens.get(k));
+			}
+
 			while ((indicesInGuess.size() > 0) && (indicesInAnswer.size() > 0)) {
 				/*iterates through IndicesInAnswer and removes the ones that should be ignored */
 				/* ArrayList<Integer> greens = new ArrayList<Integer>();
@@ -114,14 +126,15 @@ public class WordleGame {
 					indicesInAnswer.remove(greens.get(k));
 				} */
 
-				if (answer.indexOf(guess.charAt(i)) >= 0) { //if character of guess is in answer
+				//if (answer.indexOf(guess.charAt(i)) >= 0) { //if character of guess is in answer
 					if (result.get(indicesInGuess.get(0)) != Color.GREEN) {
 						//TODO: fix
 						//AND I GUESS UNLESS THE OTHER OCCURENCE IS ALREADY GREEN
 						//UNLESS IT DOES HAVE MULTIPLE
+						
 						result.set(indicesInGuess.get(0), Color.YELLOW);
 					}
-				}
+				//}
 				indicesInGuess.remove(0);
 				indicesInAnswer.remove(0);
 			}
@@ -203,12 +216,14 @@ public class WordleGame {
 	public static boolean play(InputProvider in) {
 		
 		ArrayList<String> answerList = getAnswers("answers.txt");
-		String answer = pickAnswer(answerList);
+		//String answer = pickAnswer(answerList);
+		//TODO: debugging; delete
+		String answer = "paler";
 		System.out.println("Answer is " + answer);
 		//ArrayList<Character> charsLeft = createCharArray();
 		//Scanner in = new Scanner(InputP);
 		int guessCount = 0;
-		Boolean stillPlaying = true;
+		boolean stillPlaying = true;
 		while (stillPlaying && (guessCount < 6)) {
 			String guess = in.getInput();
 			guess = checkGuessIsValid(guess);
