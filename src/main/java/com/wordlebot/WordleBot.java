@@ -2,6 +2,8 @@ package com.wordlebot;
 
 import java.util.ArrayList;
 
+import com.wordlebot.input.BotInputProvider;
+
 public class WordleBot {
 
     /*
@@ -44,29 +46,36 @@ public class WordleBot {
     }
 
     public static void analyzeGuesses(ArrayList<String> answers) {
-        
         ArrayList<Letter> letters = createCharArrayList();
         ArrayList<Letter> maxes = new ArrayList<Letter>(5); 
         //should store the letter that appears most in each position
-        for (int j = 0; j < answers.size(); j++) {
-            String word = answers.get(j);
+        for (int i = 0; i < answers.size(); i++) {
+            String word = answers.get(i);
             for (int k = 0; k < word.length(); k++) {
                 char ch = word.charAt(k);
-                
                 Letter l = findLetter(ch, letters);
                 l.incrementCount(k);
                 if (l.getCountFromIndex(k) > maxes.get(k).getCountFromIndex(k)) {
                     maxes.set(k, l); 
                 }
-
             }
         }
+        String bestGuess = "stare";
+        for (int i = 0; i < answers.size(); i++) {
+            //maybe i should just write it to pick a random guess before I optimize it like this
+        }
+    }
+
+    public static void pickGuess() {
 
     }
 
     public static void main(String[] args) {
         ArrayList<String> answers = WordleGame.getAnswers("answers.txt");
         WordleGame game = new WordleGame();
+        String guess = WordleGame.pickAnswer(answers);
+        BotInputProvider in = new BotInputProvider(guess);
+        WordleGame.play(in);
         //ALWAYS NEED TO SET INPUT BEFORE GETTING INPUT DO NOT FORGET
         System.out.println("a: " + Character.getNumericValue('a')
         + "\nb: " + Character.getNumericValue('b')

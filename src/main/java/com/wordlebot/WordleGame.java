@@ -51,6 +51,12 @@ public class WordleGame {
 		return answerList.get(randIndex);
 	}
 
+	/*
+	 * A method that simply cleans up a String and makes sure it is the correct length(5 letters)
+	 * If it is an invalid String, it sets the String to "nope"
+	 * @param guess the String that has been submitted as the guess
+	 * @return String the same string cleaned up or "nope" (if it was invalid)
+	 */
 	public static String checkGuessIsValid(String guess) {
 		guess = guess.trim().toLowerCase();
 		if (guess.length() != 5) {
@@ -102,6 +108,11 @@ public class WordleGame {
 			ArrayList<Integer> indicesInGuess = checkMultiples(guess.charAt(i), guess);
 			ArrayList<Integer> indicesInAnswer = checkMultiples(guess.charAt(i), answer);
 			ArrayList<Integer> greens = new ArrayList<Integer>();
+			/*This section (before the while loop) iterates through and removes the pairs that 
+			 * need to be ignored because they're already green.
+			 * Very important for giving correct feedback about how many of the same letter is in the word.
+			 * This took me a long time lol
+			 */
 			for (int j = 0; j < indicesInAnswer.size(); j++) {
 				if (result.get(indicesInAnswer.get(j)) == Color.GREEN) {
 					greens.add(indicesInAnswer.get(j));
@@ -112,29 +123,11 @@ public class WordleGame {
 				indicesInAnswer.remove(greens.get(k));
 				indicesInGuess.remove(greens.get(k));
 			}
-
 			while ((indicesInGuess.size() > 0) && (indicesInAnswer.size() > 0)) {
-				/*iterates through IndicesInAnswer and removes the ones that should be ignored */
-				/* ArrayList<Integer> greens = new ArrayList<Integer>();
-				for (int j = 0; j < indicesInAnswer.size(); j++) {
-					if (result.get(j) == Color.GREEN) {
-						greens.add(j); //TODO: obviously broken
-					}
+				
+				if (result.get(indicesInGuess.get(0)) != Color.GREEN) {
+					result.set(indicesInGuess.get(0), Color.YELLOW);
 				}
-
-				for (int k = 0; k < greens.size(); k++) {
-					indicesInAnswer.remove(greens.get(k));
-				} */
-
-				//if (answer.indexOf(guess.charAt(i)) >= 0) { //if character of guess is in answer
-					if (result.get(indicesInGuess.get(0)) != Color.GREEN) {
-						//TODO: fix
-						//AND I GUESS UNLESS THE OTHER OCCURENCE IS ALREADY GREEN
-						//UNLESS IT DOES HAVE MULTIPLE
-						
-						result.set(indicesInGuess.get(0), Color.YELLOW);
-					}
-				//}
 				indicesInGuess.remove(0);
 				indicesInAnswer.remove(0);
 			}
@@ -216,9 +209,7 @@ public class WordleGame {
 	public static boolean play(InputProvider in) {
 		
 		ArrayList<String> answerList = getAnswers("answers.txt");
-		//String answer = pickAnswer(answerList);
-		//TODO: debugging; delete
-		String answer = "paler";
+		String answer = pickAnswer(answerList);
 		System.out.println("Answer is " + answer);
 		//ArrayList<Character> charsLeft = createCharArray();
 		//Scanner in = new Scanner(InputP);
@@ -229,7 +220,7 @@ public class WordleGame {
 			guess = checkGuessIsValid(guess);
 			//TODO: could make a thing where it forces you to play hard mode and/or displays what
 			//letters you have left
-			if (guess != "nope") { //if guess was invalid, it is set to this String 
+			if (!guess.equals("nope")) { //if guess was invalid, it is set to this String 
 				guessCount++;
 				System.out.println("Guess is " + guess); //TODO: debugging; delete
 				

@@ -252,15 +252,13 @@ public class WordleTest
 		ArrayList<Letter> letters = WordleBot.createCharArrayList(); //test depends on this working correctly, maybe change that
 		Letter test = WordleBot.findLetter('s', letters);
 		assertEquals(correct.getChar(), test.getChar());
-		//TODO: I probably need to write like an equals method for Letter
 	}
 
-	//TODO: fix, only doing literal equals, not actual equals
 	@Test
 	public void testFindLetter2() {
 		Letter correct = new Letter('s');
 		ArrayList<Letter> letters = WordleBot.createCharArrayList(); //test depends on this working correctly, maybe change that
 		Letter test = WordleBot.findLetter('s', letters);
-		assertEquals(correct, test);
+		assertEquals(correct.getChar(), test.getChar());
 	}
 }
